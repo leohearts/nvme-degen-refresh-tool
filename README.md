@@ -37,8 +37,7 @@ options:
 | Before refresh | After refresh |
 | ---- | ---- |
 | ![Screenshot_20240922_211835](https://github.com/user-attachments/assets/8bc3c282-360c-43c4-8bb8-e74dc8c29857)
- | ![Screenshot_20240922_211920](https://github.com/user-attachments/assets/eebe69b8-da22-42b8-8238-8eda24ecb54a)
- |
+ | ![Screenshot_20240922_211920](https://github.com/user-attachments/assets/eebe69b8-da22-42b8-8238-8eda24ecb54a) |
 
 ## How does it work?
 
