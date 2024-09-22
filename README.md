@@ -14,6 +14,8 @@ Your NVME device could be very hot during refreshing. Make sure to have enough c
 
 ## Usage
 
+- Make sure your device is NOT mounted
+
 ```bash
 sudo python3 app.py [-h] [--verbose] [--start_offset START_OFFSET] device
 ```
