@@ -31,6 +31,12 @@ options:
                         Starting block offset, for continue. default: 0
 ```
 
+## Screenshot
+| Before refresh | After refresh |
+| ---- | ---- |
+| ![Screenshot_20240922_210945](https://github.com/user-attachments/assets/8451d269-62e9-4f8a-a2e2-fedc84a339e4) | ![Screenshot_20240922_211115](https://github.com/user-attachments/assets/767ad78a-f37c-49ca-95ff-840c1449f90f) |
+
+
 ## Ref
 
 https://nga.178.com/read.php?tid=24388822&rand=356
