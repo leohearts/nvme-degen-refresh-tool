@@ -8,7 +8,7 @@ NVME devices are typically going slower over time. For most of our devices, NVME
 
 ## Warning
 
-This tool is still experimental and may not work as expected. Even as we got exception handling and tested multiple times, you are still highly recommended to run it with caution, on a stable machine .
+This tool is still experimental and may not work as expected. Even as we got exception handling and tested multiple times, you are still highly recommended to run it with caution, on a stable machine . We don't take any responsibility for any damage caused by using this tool, do your own research and test.
 
 Your NVME device could be very hot during refreshing. Make sure to have enough cooling on it to prevent the device from further degrading.
 
