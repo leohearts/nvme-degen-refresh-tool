@@ -15,8 +15,8 @@ parser.add_argument('--verbose', action='store_true',
 args = parser.parse_args()
 
 # Parameters
-BLOCK_SIZE = 1024 * 1024 * 128 # 256 MB block size, should be aligned to 4096
-SLOW_THRESHOLD_MBPS = 100  # MB/s
+BLOCK_SIZE = 1024 * 1024 * 128 # 128 MB block size, should be aligned to 4096
+SLOW_THRESHOLD_MBPS = 100 # MB/s
 DEVICE = args.device  # Name of the NVMe block device (without /dev/)
 DEVICE_PATH = f"/dev/{DEVICE}"  # Path to the NVMe block device
 # DEVICE_PATH = "testdisk"
