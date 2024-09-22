@@ -10,14 +10,23 @@ NVME devices are typically going slower over time. For most of our devices, NVME
 
 This tool is still experimental and may not work as expected. Even as we got exception handling and tested multiple times, you are still highly recommended to run it with caution, on a stable machine .
 
+Your NVME device could be very hot during refreshing. Make sure to have enough cooling on it to prevent the device from further degrading.
+
 ## Usage
 
 ```bash
-sudo python3 app.py <device> [--verbose]
+sudo python3 app.py [-h] [--verbose] [--start_offset START_OFFSET] device
 ```
+Refresh NVMe block device
 
-- `device` is the name of the NVMe block device (without /dev/ , like "sda" or "nvme0")
-- `--verbose` enables verbose output
+positional arguments:
+  device                Name of the NVMe block device (without /dev/)
+
+options:
+  -h, --help            show this help message and exit
+  --verbose             Enable verbose output.
+  --start_offset START_OFFSET
+                        Starting block offset, for continue. default: 0
 
 
 ## Ref

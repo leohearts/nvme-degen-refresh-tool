@@ -12,15 +12,19 @@ parser.add_argument('device', type=str,
                     help='Name of the NVMe block device (without /dev/)')
 parser.add_argument('--verbose', action='store_true',
                     help='Enable verbose output')
+parser.add_argument('--start_offset', type=int, default=0, help='Starting block offset, for continue.')
 args = parser.parse_args()
 
 # Parameters
-BLOCK_SIZE = 1024 * 1024 * 128 # 128 MB block size, should be aligned to 4096
-SLOW_THRESHOLD_MBPS = 100 # MB/s
+BLOCK_SIZE = 1024 * 1024 * 512 # * MB block size, should be aligned to 4096
+SLOW_THRESHOLD_MBPS = 200 # MB/s
 DEVICE = args.device  # Name of the NVMe block device (without /dev/)
 DEVICE_PATH = f"/dev/{DEVICE}"  # Path to the NVMe block device
 # DEVICE_PATH = "testdisk"
 VERBOSE = args.verbose
+
+
+start_offset = args.start_offset
 
 def log_verbose(message):
     if VERBOSE:
@@ -101,7 +105,7 @@ def main():
     
     fd = os.open(DEVICE_PATH, os.O_RDWR | os.O_DIRECT)
     # Use tqdm to show progress
-    for block_num in tqdm(range(total_blocks), desc="Refreshing blocks"):
+    for block_num in tqdm(range(start_offset, total_blocks), desc="Refreshing blocks"):
         try:
             refresh_block(fd, block_num, BLOCK_SIZE)
         except KeyboardInterrupt:
