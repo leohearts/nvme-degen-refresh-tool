@@ -36,7 +36,9 @@ options:
 ## Screenshot
 | Before refresh | After refresh |
 | ---- | ---- |
-| ![Screenshot_20240922_210945](https://github.com/user-attachments/assets/8451d269-62e9-4f8a-a2e2-fedc84a339e4) | ![Screenshot_20240922_211115](https://github.com/user-attachments/assets/767ad78a-f37c-49ca-95ff-840c1449f90f) |
+| ![Screenshot_20240922_211835](https://github.com/user-attachments/assets/8bc3c282-360c-43c4-8bb8-e74dc8c29857)
+ | ![Screenshot_20240922_211920](https://github.com/user-attachments/assets/eebe69b8-da22-42b8-8238-8eda24ecb54a)
+ |
 
 ## How does it work?
 
