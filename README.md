@@ -8,9 +8,11 @@ NVME devices are typically going slower over time. For most of our devices, NVME
 
 ## Warning
 
-This tool is still experimental and may not work as expected. Even as we got exception handling and tested multiple times, you are still highly recommended to run it with caution, on a stable machine . We don't take any responsibility for any damage caused by using this tool, do your own research and test.
+This tool is still experimental and may not work as expected. Even as we got exception handling and tested multiple times, you are still highly recommended to run it with caution, on a stable machine. We don't take any responsibility for any damage caused by using this tool, do your own research and test.
 
 Your NVME device could be very hot during refreshing. Make sure to have enough cooling on it to prevent the device from further degrading.
+
+ONLY use this script if you know what you are doing and you actually need to refresh your NVMe device.
 
 ## Usage
 
@@ -35,6 +37,10 @@ options:
 | Before refresh | After refresh |
 | ---- | ---- |
 | ![Screenshot_20240922_210945](https://github.com/user-attachments/assets/8451d269-62e9-4f8a-a2e2-fedc84a339e4) | ![Screenshot_20240922_211115](https://github.com/user-attachments/assets/767ad78a-f37c-49ca-95ff-840c1449f90f) |
+
+## How does it work?
+
+For every block, it reads data from the device, check if it's slow, and refreshes it by rewriting it.
 
 
 ## Ref
