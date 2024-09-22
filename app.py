@@ -67,7 +67,7 @@ def read_block(fd, offset, block_size):
     except OSError as e:
         if e.errno == errno.EINVAL:
             print(f"Error: Direct I/O requires buffer and file system alignment.")
-            raise
+        raise
     elapsed_time = time.time() - start_time
     return elapsed_time, buffer, bytes_read
 
