@@ -16,9 +16,9 @@ Your NVME device could be very hot during refreshing. Make sure to have enough c
 
 - Make sure your device is NOT mounted
 
-```bash
+```shell
 sudo python3 app.py [-h] [--verbose] [--start_offset START_OFFSET] device
-```
+
 Refresh NVMe block device
 
 positional arguments:
@@ -29,7 +29,7 @@ options:
   --verbose             Enable verbose output.
   --start_offset START_OFFSET
                         Starting block offset, for continue. default: 0
-
+```
 
 ## Ref
 
