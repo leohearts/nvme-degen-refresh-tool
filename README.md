@@ -6,15 +6,13 @@ A minimal python script to refresh NVMe block devices using O_DIRECT.
 
 NVME devices are typically going slower over time. For most of our devices, NVME firmware will do the job of refreshing what we call "cold data" . However, for some devices, the firmware isn't designed well to refresh data over time, so we'll need to do it manually.
 
-## Warning
-
-This tool is still experimental and may not work as expected. Even as we got exception handling and tested multiple times, you are still highly recommended to run it with caution, on a stable machine. We don't take any responsibility for any damage caused by using this tool, do your own research and test.
-
-Your NVME device could be very hot during refreshing. Make sure to have enough cooling on it to prevent the device from further degrading.
-
-ONLY use this script if you know what you are doing and you actually need to refresh your NVMe device.
-
-It shouldn't destroy the data, however, it's still recommended to back up you valuable files before usage.
+> [!WARNING]
+> This tool is still experimental and may not work as expected. Even as we got exception handling and tested multiple times, you are still highly recommended to run it with caution, on a stable machine. We don't take any responsibility for any damage caused by using this tool, do your own research and test.
+> 
+> Your NVME device could be very hot during refreshing. Make sure to have enough cooling on it to prevent the device from further degrading.
+> ONLY use this script if you know what you are doing and you actually need to refresh your NVMe device.
+> 
+> It shouldn't destroy the data, however, it's still recommended to back up you valuable files before usage.
 
 ## Usage
 
