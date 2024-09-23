@@ -14,6 +14,8 @@ Your NVME device could be very hot during refreshing. Make sure to have enough c
 
 ONLY use this script if you know what you are doing and you actually need to refresh your NVMe device.
 
+It shouldn't destroy the data, however, it's still recommended to back up you valuable files before usage.
+
 ## Usage
 
 - Make sure your device is NOT mounted
@@ -41,7 +43,7 @@ options:
 
 ## How does it work?
 
-For every block, it reads data from the device, check if it's slow, and refreshes it by rewriting it.
+For every block, it reads data from the device, check if it's slow, and refreshes it by writing the same data back.
 
 
 ## Ref
