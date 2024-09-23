@@ -12,6 +12,8 @@ parser.add_argument('device', type=str,
                     help='Name of the NVMe block device (without /dev/)')
 parser.add_argument('--verbose', action='store_true',
                     help='Enable verbose output')
+parser.add_argument('--test', action='store_true',
+                    help='Only test block speed without refreshing')
 parser.add_argument('--start_offset', type=int, default=0, help='Starting block offset, for continue.')
 args = parser.parse_args()
 
@@ -22,12 +24,12 @@ DEVICE = args.device  # Name of the NVMe block device (without /dev/)
 DEVICE_PATH = f"/dev/{DEVICE}"  # Path to the NVMe block device
 # DEVICE_PATH = "testdisk"
 VERBOSE = args.verbose
-
+TEST_MODE = args.test
 
 start_offset = args.start_offset
 
 def log_verbose(message):
-    if VERBOSE:
+    if VERBOSE or TEST_MODE:
         print(message)
 
 def get_total_size(): 
@@ -87,7 +89,7 @@ def refresh_block(fd, offset, block_size):
     elapsed_time, data, bytes_read = read_block(fd, offset, block_size)
     speed_mbps = (block_size / 1024 / 1024) / elapsed_time
     log_verbose(f"Block {offset} is {speed_mbps:.2f} MB/s")
-    if speed_mbps < SLOW_THRESHOLD_MBPS:
+    if not TEST_MODE and (speed_mbps < SLOW_THRESHOLD_MBPS):
         if bytes_read != block_size:
             print("ERROR: Block size mismatch, skipping block", offset) 
             return
@@ -105,7 +107,7 @@ def main():
     
     fd = os.open(DEVICE_PATH, os.O_RDWR | os.O_DIRECT)
     # Use tqdm to show progress
-    for block_num in tqdm(range(start_offset, total_blocks), desc="Refreshing blocks", initial=start_offset, total=total_blocks):
+    for block_num in tqdm(range(start_offset, total_blocks), desc=("Testing blocks" if TEST_MODE else "Refreshing blocks"), initial=start_offset, total=total_blocks):
         try:
             refresh_block(fd, block_num, BLOCK_SIZE)
         except KeyboardInterrupt:
