@@ -19,7 +19,7 @@ ONLY use this script if you know what you are doing and you actually need to ref
 - Make sure your device is NOT mounted
 
 ```shell
-sudo python3 app.py [-h] [--verbose] [--start_offset START_OFFSET] device
+sudo python3 app.py [-h] [--verbose] [--test] [--start_offset START_OFFSET] device
 
 Refresh NVMe block device
 
@@ -28,9 +28,10 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --verbose             Enable verbose output.
+  --verbose             Enable verbose output
+  --test                Only test block speed without refreshing
   --start_offset START_OFFSET
-                        Starting block offset, for continue. default: 0
+                        Starting block offset, for continue.
 ```
 
 ## Screenshot
