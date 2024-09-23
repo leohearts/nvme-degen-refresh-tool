@@ -105,7 +105,7 @@ def main():
     
     fd = os.open(DEVICE_PATH, os.O_RDWR | os.O_DIRECT)
     # Use tqdm to show progress
-    for block_num in tqdm(range(start_offset, total_blocks), desc="Refreshing blocks", initial=start_offset):
+    for block_num in tqdm(range(start_offset, total_blocks), desc="Refreshing blocks", initial=start_offset, total=total_blocks):
         try:
             refresh_block(fd, block_num, BLOCK_SIZE)
         except KeyboardInterrupt:
