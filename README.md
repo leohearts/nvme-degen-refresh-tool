@@ -32,7 +32,11 @@ options:
   --test                Only test block speed without refreshing
   --start_offset START_OFFSET
                         Starting block offset, for continue.
+
+Example: sudo python3 app.py --start_offset 0 --verbose sda
 ```
+
+Ctrl-C will stop program after the current block gets processed.
 
 ## Screenshot
 | Before refresh | After refresh |
