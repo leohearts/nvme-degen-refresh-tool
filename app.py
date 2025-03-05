@@ -21,7 +21,7 @@ args = parser.parse_args()
 BLOCK_SIZE = 1024 * 1024 * 512 # * MB block size, should be aligned to 4096
 SLOW_THRESHOLD_MBPS = 200 # MB/s
 DEVICE = args.device  # Name of the NVMe block device (without /dev/)
-DEVICE_PATH = f"/dev/{DEVICE}"  # Path to the NVMe block device
+DEVICE_PATH = DEVICE if os.path.isfile(DEVICE) else f"/dev/{DEVICE}"  # Path to the NVMe block device
 # DEVICE_PATH = "testdisk"
 VERBOSE = args.verbose
 TEST_MODE = args.test
@@ -82,26 +82,27 @@ def write_block(fd, offset, block_size, data):
     bytes_written = os.writev(fd, [data])  # Write the block back with direct I/O
     return bytes_written
 
-def refresh_block(fd, offset, block_size):
+def refresh_block(fd, offset, block_size, total_blocks):
     """
     Reads a block from the device or file and refreshes it by rewriting it if it's slow.
     """
     elapsed_time, data, bytes_read = read_block(fd, offset, block_size)
-    speed_mbps = (block_size / 1024 / 1024) / elapsed_time
+    speed_mbps = (bytes_read / 1024 / 1024) / elapsed_time
     log_verbose(f"Block {offset} is {speed_mbps:.2f} MB/s")
+
+    if bytes_read != block_size and offset != total_blocks -1:
+        print("ERROR: Block size mismatch (%d, %d), skipping block" % (bytes_read, block_size), offset)
+        return
     if not TEST_MODE and (speed_mbps < SLOW_THRESHOLD_MBPS):
-        if bytes_read != block_size:
-            print("ERROR: Block size mismatch, skipping block", offset) 
-            return
         log_verbose(f"Refreshing block {offset} with {speed_mbps:.2f} MB/s")
         write_block(fd, offset, block_size, data)
 
 def main():
     total_size = get_total_size()
     if total_size is None:
-        print(f"Could not determine total size of file/device {DEVICE}")
+        print(f"Could not determine total size of file/device {DEVICE}\nHint: use device name instead of path, e.g. sda")
         return
-    total_blocks = total_size // BLOCK_SIZE
+    total_blocks = (total_size // BLOCK_SIZE) + 1
     print(f"Total size of {DEVICE}: {total_size / (1024 * 1024 * 1024):.2f} GB")
     print(f"Total blocks to process: {total_blocks}")
     
@@ -109,7 +110,7 @@ def main():
     # Use tqdm to show progress
     for block_num in tqdm(range(start_offset, total_blocks), desc=("Testing blocks" if TEST_MODE else "Refreshing blocks"), initial=start_offset, total=total_blocks):
         try:
-            refresh_block(fd, block_num, BLOCK_SIZE)
+            refresh_block(fd, block_num, BLOCK_SIZE, total_blocks)
         except KeyboardInterrupt:
             print("Trying to exit gracefully...")
             break
